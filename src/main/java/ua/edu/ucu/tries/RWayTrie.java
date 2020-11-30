@@ -79,7 +79,9 @@ public class RWayTrie implements Trie {
             return;
         }
         if (x.value != null) {
-            q.offer(pre);
+            if (!q.offer(pre)) {
+                throw new RuntimeException("Can't add word " + pre + " to queue");
+            }
         }
         for (char c = DEFAULT_SHIFT; c < R + DEFAULT_SHIFT; c++) {
             collect(x.next[c - DEFAULT_SHIFT], pre + c, q);

@@ -53,7 +53,9 @@ public class PrefixMatches {
         Queue<String> filtered = new LinkedList<>();
         for (String word : allKQ) {
             if (word.length() - pref.length() < k) {
-                filtered.offer(word);
+                if (!filtered.offer(word)) {
+                    throw new RuntimeException("Can't add word " + word);
+                }
             }
         }
         return filtered;
