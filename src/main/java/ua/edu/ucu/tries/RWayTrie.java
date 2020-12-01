@@ -1,7 +1,9 @@
 package ua.edu.ucu.tries;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import ua.edu.ucu.immutable.Queue;
+
+import java.util.Iterator;
+
 
 public class RWayTrie implements Trie {
     private final static int R = 26;                // 26 symbols in alphabet
@@ -38,9 +40,10 @@ public class RWayTrie implements Trie {
 
     @Override
     public Iterable<String> wordsWithPrefix(String s) {
-        Queue<String> q = new LinkedList<>();
+//        Queue<String> q = new LinkedList<>();
+        Queue q = new Queue();
         collect(get(root, s, 0), s, q);
-        return q;
+        return q::getIterator;
     }
 
     @Override
@@ -74,14 +77,12 @@ public class RWayTrie implements Trie {
         return x;
     }
 
-    private void collect(Node x, String pre, Queue<String> q) {
+    private void collect(Node x, String pre, Queue q) {
         if (x == null) {
             return;
         }
         if (x.value != null) {
-            if (!q.offer(pre)) {
-                throw new RuntimeException("Can't add word " + pre + " to queue");
-            }
+            q.enqueue(pre);
         }
         for (char c = DEFAULT_SHIFT; c < R + DEFAULT_SHIFT; c++) {
             collect(x.next[c - DEFAULT_SHIFT], pre + c, q);

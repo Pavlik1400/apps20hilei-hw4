@@ -1,11 +1,12 @@
 package ua.edu.ucu.autocomplete;
 
+import ua.edu.ucu.immutable.Queue;
 import ua.edu.ucu.tries.RWayTrie;
 import ua.edu.ucu.tries.Trie;
 import ua.edu.ucu.tries.Tuple;
 
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  *
@@ -49,16 +50,17 @@ public class PrefixMatches {
     }
 
     public Iterable<String> wordsWithPrefix(String pref, int k) {
-        Queue<String> allKQ = (Queue<String>) trie.wordsWithPrefix(pref);
-        Queue<String> filtered = new LinkedList<>();
-        for (String word : allKQ) {
+        Iterator<String> allKQ = trie.wordsWithPrefix(pref).iterator();
+        Queue filtered = new Queue();
+
+        String word;
+        while(allKQ.hasNext()) {
+            word = allKQ.next();
             if (word.length() - pref.length() < k) {
-                if (!filtered.offer(word)) {
-                    throw new RuntimeException("Can't add word " + word);
-                }
+                filtered.enqueue(word);
             }
         }
-        return filtered;
+        return filtered::getIterator;
     }
 
     public int size() {
