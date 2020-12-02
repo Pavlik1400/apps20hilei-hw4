@@ -8,7 +8,6 @@ import ua.edu.ucu.tries.Tuple;
 import java.util.Iterator;
 
 /**
- *
  * @author andrii
  */
 public class PrefixMatches {
@@ -45,7 +44,7 @@ public class PrefixMatches {
     }
 
     public Iterable<String> wordsWithPrefix(String pref) {
-       return trie.wordsWithPrefix(pref);
+        return trie.wordsWithPrefix(pref);
     }
 
     public Iterable<String> wordsWithPrefix(String pref, int k) {
@@ -53,7 +52,7 @@ public class PrefixMatches {
         Queue filtered = new Queue();
 
         String word;
-        while(allKQ.hasNext()) {
+        while (allKQ.hasNext()) {
             word = allKQ.next();
             if (word.length() - pref.length() < k) {
                 filtered.enqueue(word);

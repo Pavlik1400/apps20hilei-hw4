@@ -4,8 +4,8 @@ import ua.edu.ucu.immutable.Queue;
 
 
 public class RWayTrie implements Trie {
-    private final static int R = 26;                // 26 symbols in alphabet
-    private final static int DEFAULT_SHIFT = 97;    // 'a' ascii code
+    private static final int R = 26;                // 26 symbols in alphabet
+    private static final int DEFAULT_SHIFT = 97;    // 'a' ascii code
     private Node root = new Node();
     private int size = 0;
 
@@ -71,7 +71,8 @@ public class RWayTrie implements Trie {
             return x;
         }
         char c = word.charAt(d); // Use dth word char to identify subtrie.
-        x.next[c - DEFAULT_SHIFT] = put(x.next[c - DEFAULT_SHIFT], word, val, d + 1);
+        x.next[c - DEFAULT_SHIFT] =
+                put(x.next[c - DEFAULT_SHIFT], word, val, d + 1);
         return x;
     }
 
@@ -91,8 +92,9 @@ public class RWayTrie implements Trie {
         if (x == null) {
             return null;
         }
-        if (d == word.length())
+        if (d == word.length()) {
             x.value = null;
+        }
         else {
             char c = word.charAt(d);
             x.next[c] = delete(x.next[c - DEFAULT_SHIFT], word, d + 1);

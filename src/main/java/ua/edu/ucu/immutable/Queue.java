@@ -1,6 +1,7 @@
 package ua.edu.ucu.immutable;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class Queue {
     private ImmutableLinkedList container;
@@ -44,7 +45,11 @@ public class Queue {
 
             @Override
             public T next() {
-                return (T) dequeue();
+                if (hasNext()) {
+                    return (T) dequeue();
+                } else {
+                    throw new NoSuchElementException();
+                }
             }
         };
     }
