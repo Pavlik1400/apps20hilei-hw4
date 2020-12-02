@@ -2,8 +2,6 @@ package ua.edu.ucu.tries;
 
 import ua.edu.ucu.immutable.Queue;
 
-import java.util.Iterator;
-
 
 public class RWayTrie implements Trie {
     private final static int R = 26;                // 26 symbols in alphabet

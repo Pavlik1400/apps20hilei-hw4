@@ -1,5 +1,4 @@
 package ua.edu.ucu.immutable;
-import ua.edu.ucu.immutable.Node;
 
 
 public final class ImmutableLinkedList implements ImmutableList {
