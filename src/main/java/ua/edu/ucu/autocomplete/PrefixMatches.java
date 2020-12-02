@@ -1,7 +1,6 @@
 package ua.edu.ucu.autocomplete;
 
 import ua.edu.ucu.immutable.Queue;
-import ua.edu.ucu.tries.RWayTrie;
 import ua.edu.ucu.tries.Trie;
 import ua.edu.ucu.tries.Tuple;
 
@@ -12,14 +11,10 @@ import java.util.Iterator;
  */
 public class PrefixMatches {
 
-    private Trie trie;
+    private final Trie trie;
 
     public PrefixMatches(Trie trie) {
         this.trie = trie;
-    }
-
-    public PrefixMatches() {
-        this.trie = new RWayTrie();
     }
 
     public int load(String... strings) {

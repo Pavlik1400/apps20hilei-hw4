@@ -10,22 +10,6 @@ public class Queue {
         container = new ImmutableLinkedList();
     }
 
-    public Queue(Object[] objects) {
-        container = new ImmutableLinkedList(objects);
-    }
-
-    public int size() {
-        return container.size();
-    }
-
-    public Object peek() {
-        return container.getFirst();
-    }
-
-    public Object last() {
-        return container.getLast();
-    }
-
     public void enqueue(Object obj) {
         container = container.addLast(obj);
     }

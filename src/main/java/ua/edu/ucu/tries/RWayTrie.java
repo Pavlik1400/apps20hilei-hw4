@@ -97,7 +97,7 @@ public class RWayTrie implements Trie {
         }
         else {
             char c = word.charAt(d);
-            x.next[c] = delete(x.next[c - DEFAULT_SHIFT], word, d + 1);
+            x.next[c - DEFAULT_SHIFT] = delete(x.next[c - DEFAULT_SHIFT], word, d + 1);
         }
         if (x.value != null) {
             return x;

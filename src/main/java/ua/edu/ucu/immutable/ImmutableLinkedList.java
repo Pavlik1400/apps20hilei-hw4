@@ -18,28 +18,6 @@ public final class ImmutableLinkedList implements ImmutableList {
         size = copyLinkedList(head, this.head,  this.tail);
     }
 
-    public ImmutableLinkedList(Object[] objects) {
-        this.head = new Node();
-        this.tail = new Node();
-        Node[] converted = arrToLinkedList(objects);
-        size = copyLinkedList(converted[0], this.head,  this.tail);
-    }
-
-    @Override
-    public ImmutableList add(Object e) {
-        return addAll(new Object[]{e});
-    }
-
-    @Override
-    public ImmutableList add(int index, Object e) {
-        return addAll(index, new Object[]{e});
-    }
-
-    @Override
-    public ImmutableList addAll(Object[] c) {
-        return addAll(size, c);
-    }
-
     @Override
     public ImmutableList addAll(int index, Object[] c) {
         if (index < 0 || index > size) {
@@ -104,68 +82,19 @@ public final class ImmutableLinkedList implements ImmutableList {
     }
 
     @Override
-    public ImmutableList set(int index, Object e) {
-        checkIndex(index);
-        Node newHead = new Node();
-        // copy list
-        copyLinkedList(head, newHead, new Node());
-        Node current = newHead;
-        // go to node that was before on <index> position
-        for (int idx = 0; idx < index; idx++) {
-            current = current.next();
-        }
-        // set value
-        current.setValue(e);
-        return new ImmutableLinkedList(newHead);
-    }
-
-    @Override
-    public int indexOf(Object e) {
-        Node current = head;
-        int idx = 0;
-        while (current != null) {
-            if (current.getValue() == e) {
-                return idx;
-            }
-            current = current.next();
-            idx++;
-        }
-        return -1;
-    }
-
-    @Override
     public int size() {
         return size;
     }
 
-    @Override
-    public ImmutableList clear() {
-        return new ImmutableLinkedList();
-    }
 
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
-    @Override
-    public Object[] toArray() {
-        Node current = head;
-        Object[] res = new Object[size];
-        for (int idx = 0; idx < size; idx++) {
-            res[idx] = current.getValue();
-            current = current.next();
-        }
-        return res;
-    }
-
     /* ****************************
     Methods for only LinkedList
      */
-    public ImmutableLinkedList addFirst(Object e) {
-        return (ImmutableLinkedList) addAll(0, new Object[]{e});
-    }
-
     public ImmutableLinkedList addLast(Object e) {
         return (ImmutableLinkedList) addAll(size, new Object[]{e});
     }
@@ -174,16 +103,8 @@ public final class ImmutableLinkedList implements ImmutableList {
         return get(0);
     }
 
-    public Object getLast() {
-        return get(size-1);
-    }
-
     public ImmutableLinkedList removeFirst() {
         return (ImmutableLinkedList) remove(0);
-    }
-
-    public ImmutableLinkedList removeLast() {
-        return (ImmutableLinkedList) remove(size-1);
     }
 
     /* ****************************
@@ -249,21 +170,6 @@ public final class ImmutableLinkedList implements ImmutableList {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
-    }
-
-    public String toString() {
-        StringBuilder res = new StringBuilder("[");
-        Node current = head;
-        if (size > 0) {
-            res.append(current.getValue().toString());
-            current = current.next();
-        }
-        while (current != null) {
-            res.append(", ").append(current.getValue().toString());
-            current = current.next();
-        }
-        return res.append("]").toString();
-
     }
 }
 
