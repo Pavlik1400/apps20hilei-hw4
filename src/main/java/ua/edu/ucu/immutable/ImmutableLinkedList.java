@@ -81,11 +81,6 @@ public final class ImmutableLinkedList implements ImmutableList {
         return new ImmutableLinkedList(newHead);
     }
 
-    @Override
-    public int size() {
-        return size;
-    }
-
 
     @Override
     public boolean isEmpty() {

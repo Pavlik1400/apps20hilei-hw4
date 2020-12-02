@@ -16,9 +16,6 @@ public interface ImmutableList {
     // якщо індекс виходить за межі колекції
     ImmutableList remove(int index);
 
-    //розмір колекції
-    int size();
-
     //якщо у колеції нема елементів то повертає true
     boolean isEmpty();
 }

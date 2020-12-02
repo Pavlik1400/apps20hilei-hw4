@@ -63,17 +63,20 @@ public class RWayTrie implements Trie {
 
     private Node put(Node x, String word, Object val, int d) {
         // Change value associated with word if in subtrie rooted at x.
+        Node retNode;
         if (x == null) {
-            x = new Node();
+            retNode = new Node();
+        } else {
+            retNode = x;
         }
         if (d == word.length()) {
-            x.value = val;
-            return x;
+            retNode.value = val;
+            return retNode;
         }
         char c = word.charAt(d); // Use dth word char to identify subtrie.
-        x.next[c - DEFAULT_SHIFT] =
-                put(x.next[c - DEFAULT_SHIFT], word, val, d + 1);
-        return x;
+        retNode.next[c - DEFAULT_SHIFT] =
+                put(retNode.next[c - DEFAULT_SHIFT], word, val, d + 1);
+        return retNode;
     }
 
     private void collect(Node x, String pre, Queue q) {
@@ -97,7 +100,8 @@ public class RWayTrie implements Trie {
         }
         else {
             char c = word.charAt(d);
-            x.next[c - DEFAULT_SHIFT] = delete(x.next[c - DEFAULT_SHIFT], word, d + 1);
+            x.next[c - DEFAULT_SHIFT] =
+                    delete(x.next[c - DEFAULT_SHIFT], word, d + 1);
         }
         if (x.value != null) {
             return x;

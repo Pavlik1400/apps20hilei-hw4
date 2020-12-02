@@ -10,13 +10,6 @@ public final class Node {
     private Object value = null;
 
     public Node() { }
-    public Node(Object value, Node next) {
-        this.next = next;
-        this.value = value;
-    }
-    public Node(Object value) {
-        this.value = value;
-    }
 
     public Node next() {
         return next;
